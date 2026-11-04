@@ -1,126 +1,259 @@
-# Contributing to the BetterGov.ph LGU Directory
+# Contributing to BetterLB
 
-Thank you for being part of the BetterGov.ph community. This guide explains how to register your LGU, update an existing entry, or contribute a template.
-
----
-
-## Adding Your LGU
-
-You do not need to have a finished portal to register. If you are planning to build one, register early — it signals intent to your community and lets others find and support you.
-
-### Steps
-
-1. **Fork this repository.**
-
-2. **Edit `README.md`** and add a row to the Directory table:
-
-   ```markdown
-   | Your LGU Name | [yourdomain.org](https://yourdomain.org) or - | [GitHub](https://github.com/you/repo) or - | [Facebook](https://facebook.com/yourpage) or - | 🔵 Planned | [@yourhandle](https://github.com/yourhandle) |
-   ```
-
-   The **Socials** column accepts one or more platform links. Multiple links are comma-separated, e.g. `[Facebook](https://facebook.com/yourpage), [X](https://x.com/yourhandle)`.
-
-   Use `-` for any field that does not apply yet.
-
-3. **Choose the correct status badge:**
-
-   | Badge               | When to use                                          |
-   |---------------------|------------------------------------------------------|
-   | 🔵 Planned          | You intend to build a portal but haven't started yet |
-   | 🟡 Work in Progress | Actively building, not yet launched                  |
-   | 🟢 Active           | Publicly launched and actively maintained            |
-   | 🔴 Unmaintained     | Previously active but no longer maintained           |
-
-   Keep a `🔵 Planned` entry moving. Planned entries that see no directory activity for over 30 days are tagged `⚠️ Stale` and `🤝 Open for Adoption` — see [Stale Entries](#stale-entries).
-
-4. **Open a Pull Request** with the title format:
-
-   ```
-   Add [LGU Name] to directory
-   ```
-
-5. A maintainer will review and merge your PR.
+Thank you for your interest in contributing! We welcome developers, designers, writers, and anyone passionate about better government transparency.
 
 ---
 
-## Updating an Existing Entry
+## Quick Start
 
-If your LGU's status, domain, repository, or maintainer has changed:
-
-1. Fork this repository.
-2. Edit the relevant row in `README.md`.
-3. Open a PR with the title format:
-
+1. **Fork and Clone**
+   ```bash
+   git clone https://github.com/<your-username>/betterlb
+   cd betterlb
+   npm install
    ```
-   Update [LGU Name] — [brief reason, e.g. "status change to Active"]
+
+2. **Create a Branch**
+   ```bash
+   git checkout -b feature/your-feature-name
    ```
+
+3. **Make Changes**
+   - Follow the code patterns below
+   - Test your changes
+   - Commit with conventional commits
+
+4. **Submit Pull Request**
+   - Target the `main` branch
+   - Describe your changes clearly
+   - Link related issues
 
 ---
 
-## Stale Entries
+## Code Conventions
 
-A `🔵 Planned` entry whose row has not changed in over 30 days is tagged `⚠️ Stale` in the Status column and `🤝 Open for Adoption` under its maintainer:
+### Commit Messages
+
+Follow [Conventional Commits](https://www.conventionalcommits.org/):
 
 ```
-| Your LGU Name | - | - | - | 🔵 Planned<br>⚠️ Stale | [@yourhandle](https://github.com/yourhandle)<br>🤝 Open for Adoption |
+<type>[optional scope]: <short description>
+
+Types:
+feat:     New feature
+fix:      Bug fix
+docs:     Documentation only
+style:    Code style (no logic change)
+refactor: Code refactoring
+test:     Adding or updating tests
+chore:    Maintenance tasks
+
+Examples:
+feat(services): add search filter by category
+fix(navbar): correct mobile menu toggle
+docs: update setup instructions
 ```
 
-The two tags always appear together, and only on `🔵 Planned` entries — the sync script rejects any other combination.
+### Code Style
 
-**If it is your entry:** it is not a penalty and nothing is removed. Any update clears it — move to `🟡 Work in Progress`, add your repo link, or open a PR removing both tags to confirm you are still on it.
+- **Prettier** auto-formats on commit (via Husky)
+- **ESLint** enforces rules (max warnings = 0)
+- **TypeScript** strict mode enabled
 
-**If you want to adopt one:** open a PR that updates the Maintainer/s column to your handle and removes the `⚠️ Stale` and `🤝 Open for Adoption` tags. That is the whole change — the status stays `🔵 Planned` until you actually start building, at which point you move it to `🟡 Work in Progress` as a normal update. No heads-up needed beforehand; if the adoption needs discussion, that happens in the PR. Taking over outright and collaborating with the original maintainer are both fine — list both handles if you are working together, or just yours if you are taking it on alone.
+### Design System (Kapwa)
 
-Adopting resets the clock: the entry counts as updated from the day that PR merges, so it will not be re-tagged for another 30 days.
+**Always use semantic tokens, never raw colors:**
 
-The tags are applied by the repository maintainers during periodic reviews, never by automation. Elapsed time is what prompts a look, not the whole judgement — an entry with visible progress elsewhere will not be tagged just because its row has not changed.
+```tsx
+// ✅ Correct
+<div className="bg-kapwa-surface text-kapwa-text-strong">
 
----
+// ❌ Wrong
+<div className="bg-blue-500 text-white">
+```
 
-## Contributing a Template
+### Component Guidelines
 
-If you have built a reusable starter template:
+- **Keep components under 200 lines** - split if larger
+- **Extract complex logic to hooks** - keeps components clean
+- **Use barrel exports** - `index.ts` in component folders
+- **Document exports** - JSDoc comments on public APIs
 
-1. Fork this repository.
-2. Add a row to the templates table in both `README.md` and `TEMPLATES.md`.
-3. Open a PR with the title format:
-
-   ```
-   Add template — [Template Name]
-   ```
-
----
-
-## What Happens After You Open a PR
-
-Some labels are applied automatically, so do not worry about setting them yourself.
-
-| Label | Meaning |
-|--------------------|--------------------------------------------------------------------------|
-| `entry:new` | Your PR adds a new LGU row. |
-| `entry:update` | Your PR changes an existing LGU row. |
-| `entry:collision` | The LGU you added is already in the directory — see the comment on your PR. |
-| `needs-verification` | Your PR introduces new links; a maintainer will check them before merging. |
-
-A maintainer may then add:
-
-- `needs-changes` — something needs fixing on your side. A PR that sits here for 14 days is marked `stale` and closed 7 days later. Closing is not a rejection; reopen it whenever you are ready.
-- `needs-coordination` — someone is already registered for that LGU. Talk to them rather than adding a second row; two contributors on one portal is a good outcome.
-- `blocked` — waiting on something outside this repository, such as a domain going live.
-
-If you are looking for something to pick up, the `open-for-adoption` label marks entries that have no active maintainer.
+```tsx
+// src/components/example/index.ts
+export { Example } from './Example';
+export type { ExampleProps };
+```
 
 ---
 
-## Changelog
+## Development Workflow
 
-Please do **not** update `CHANGELOG.md` in your Pull Request. The repository maintainers will update the changelog periodically to summarize recent additions and improvements.
+### Setup
+
+```bash
+# Use correct Node version
+nvm use  # or fnm use
+
+# Install dependencies
+npm install
+
+# Prepare data files
+python3 scripts/merge_services.py
+
+# Start dev server
+npm run dev
+```
+
+### Testing
+
+```bash
+# Run E2E tests
+npm run test:e2e
+
+# Run specific test file
+npx playwright test services.spec.ts
+
+# Run with debug mode
+npx playwright test --debug
+
+# Check linting
+npm run lint
+
+# Format code
+npm run format
+```
+
+**Note:** E2E tests use Playwright with shared utilities in `e2e/utils/` for common testing patterns like semantic token validation.
+
+### Pre-commit Hooks
+
+Husky runs automatically:
+- **Prettier** formats code
+- **ESLint** checks quality
+- **Kapwa token check** prevents raw colors in component files
+
+### Testing Utilities
+
+The project includes shared E2E testing utilities in `e2e/utils/`:
+
+- **`kapwa.ts`** - Semantic token validation helper that enforces Kapwa design token usage
+  - `assertKapwaTokens()` - Validates no raw Tailwind colors are used
+  - Automatically excludes code examples from validation
+
+These utilities help maintain design system consistency across the application.
 
 ---
 
-## Guidelines
+## Project Patterns
 
-- Keep entries accurate and up to date.
-- Use `—` rather than leaving cells blank.
-- Do not remove another LGU's entry — open an issue instead if something looks wrong.
-- Be respectful. This is a civic community project.
+### Data Fetching
+
+```tsx
+// Static data - direct import
+import services from '@/data/services.json';
+
+// Dynamic data - API endpoint
+const response = await fetch('/api/legislation/documents');
+```
+
+### Custom Hooks
+
+```tsx
+// Extract complex logic to hooks
+function useServiceData(slug: string) {
+  const [data, setData] = useState(null);
+  // ... logic
+  return { data, loading, error };
+}
+```
+
+### Page Structure
+
+```tsx
+// Standard page pattern
+export default function PageName() {
+  // 1. Hooks first
+  const { data } = useData();
+
+  // 2. Early returns
+  if (!data) return <Loading />;
+
+  // 3. Render
+  return (
+    <PageLayout>
+      <PageHeader>...</PageHeader>
+      <Content>...</Content>
+    </PageLayout>
+  );
+}
+```
+
+---
+
+## Common Tasks
+
+### Adding a New Service
+
+1. Update service data in `src/data/citizens-charter/`
+2. Run `python3 scripts/merge_services.py`
+3. Test the service detail page
+
+### Adding a New Page
+
+1. Create file in `src/pages/your-page/`
+2. Add route in `src/App.tsx`
+3. Add navigation link if needed
+4. Add E2E test in `e2e/`
+
+### Updating LGU Config
+
+Edit `config/lgu.config.json` - changes apply automatically.
+
+---
+
+## Pull Request Guidelines
+
+### Before Submitting
+
+- [ ] Tests pass locally (`npm run test:e2e`)
+- [ ] No linting errors (`npm run lint`)
+- [ ] Code is formatted (`npm run format`)
+- [ ] Commits follow conventional format
+- [ ] PR description explains changes
+
+### PR Description Template
+
+```markdown
+## Summary
+Brief description of changes
+
+## Changes
+- Change 1
+- Change 2
+
+## Testing
+- Tested on: [browsers]
+- E2E tests: [pass/fail/NA]
+
+## Related Issues
+Closes #123
+```
+
+---
+
+## Getting Help
+
+- **Issues:** [github.com/BetterLosBanos/betterlb/issues](https://github.com/BetterLosBanos/betterlb/issues)
+- **Discussions:** [github.com/BetterLosBanos/betterlb/discussions](https://github.com/BetterLosBanos/betterlb/discussions)
+- **Live Site:** [https://betterlb.org](https://betterlb.org)
+
+---
+
+## License
+
+By contributing, you agree that your code will be released under the [Creative Commons CC0](https://creativecommons.org/publicdomain/zero/1.0/) license.
+
+---
+
+**Thank you for contributing to BetterLB!** 🇵🇭

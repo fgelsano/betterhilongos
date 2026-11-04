@@ -1,0 +1,65 @@
+{
+  "lgu": {
+    "name": "Hilongos",
+    "fullName": "Municipality of Hilongos",
+    "shortName": "HIL",
+    "province": "Leyte",
+    "region": "Eastern Visayas (VIII)",
+    "regionCode": "080000000",
+    "type": "municipality",
+    "officialWebsite": "https://betterhilongos.org",
+    "provinceWebsite": ""
+  },
+  "portal": {
+    "name": "BetterHilongos",
+    "domain": "betterhilongos.org",
+    "baseUrl": "https://betterhilongos.org",
+    "tagline": "Community Powered Hilongos Portal",
+    "description": "Community-powered portal of the Municipality of Hilongos.",
+    "brandColor": "#0066eb",
+    "navbarTagline": "A Community-run portal for",
+    "footerBrandName": "Better Hilongos",
+    "footerTagline": "Community Civic Portal",
+    "logoWhitePath": "/logos/svg/betterlb-icon-white.svg",
+    "navbarLogoPath": "/logos/svg/betterlb-icon-colored.svg",
+    "defaultOgImagePath": "/logos/svg/betterlb-icon-colored.svg",
+    "faviconPath": "/logos/png/betterlb-banner-colored.png",
+    "faviconSvgPath": "/logos/svg/betterlb-logo-primary.svg",
+    "appleTouchIconPath": "/logos/png/betterlb-banner-inverted.png",
+    "githubUrl": "https://github.com/fgelsano/betterhilongos",
+    "discordUrl": "",
+    "facebookUrl": "",
+    "contactEmail": "volunteers@bettergov.ph"
+  },
+  "location": {
+    "coordinates": {
+      "lat": 10.3667,
+      "lon": 124.75
+    },
+    "weather": {
+      "defaultCity": "Hilongos"
+    }
+  },
+  "transparency": {
+    "procurement": {
+      "organizationName": "MUNICIPALITY OF HILONGOS, LEYTE"
+    },
+    "infrastructure": {
+      "searchString": "Hilongos",
+      "exactMatchTargets": ["hilongos"]
+    }
+  },
+  "dataPaths": {
+    "departments": "src/data/directory/departments.json",
+    "barangays": "src/data/directory/barangays.json",
+    "executive": "src/data/directory/executive.json",
+    "legislative": "src/data/directory/legislative.json",
+    "services": "src/data/services"
+  },
+  "features": {
+    "openLGU": true,
+    "transparency": true,
+    "tourism": false,
+    "statistics": true
+  }
+}

@@ -1,36 +1,26 @@
-name: Close Abandoned PRs
+# This workflow warns and then closes issues and PRs that have had no activity for a specified amount of time.
+#
+# You can adjust the behavior by modifying this file.
+# For more information, see:
+# https://github.com/actions/stale
+name: Mark stale issues and pull requests
 
-# Only pull requests that are explicitly waiting on their contributor go stale.
-# Everything else — including anything a maintainer is sitting on — is left alone.
 on:
   schedule:
-    - cron: '0 1 * * *'
-  workflow_dispatch:
-
-permissions:
-  contents: read
-  pull-requests: write
+    - cron: '30 1 * * *'
 
 jobs:
   stale:
     runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+
     steps:
-      - uses: actions/stale@v11
+      - uses: actions/stale@4391f3da665fdf50b6810c1a66712fb9ba21aa93 # v11.0.0
         with:
-          only-labels: needs-changes
-          days-before-pr-stale: 14
-          days-before-pr-close: 7
-          stale-pr-label: stale
-          exempt-pr-labels: blocked,needs-coordination
-          remove-stale-when-updated: true
-          stale-pr-message: >
-            This pull request has been waiting on changes for 14 days. Comment or
-            push an update to keep it open — otherwise it will be closed in 7
-            days. Closing is not a rejection: reopen or open a fresh PR whenever
-            you are ready.
-          close-pr-message: >
-            Closing after 21 days with no updates. Reopen this PR or open a new
-            one any time — the entry is still welcome.
-          # Issues are triaged by hand; never touch them.
-          days-before-issue-stale: -1
-          days-before-issue-close: -1
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          stale-issue-message: 'Stale issue message'
+          stale-pr-message: 'Stale pull request message'
+          stale-issue-label: 'no-issue-activity'
+          stale-pr-label: 'no-pr-activity'
