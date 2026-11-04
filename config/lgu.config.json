@@ -46,9 +46,7 @@
     },
     "infrastructure": {
       "searchString": "Hilongos",
-      "exactMatchTargets": [
-        "hilongos"
-      ]
+      "exactMatchTargets": ["hilongos"]
     }
   },
   "dataPaths": {
